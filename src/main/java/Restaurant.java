@@ -90,9 +90,20 @@ public class Restaurant {
         .executeAndFetchFirst(Restaurant.class);
     }
   }
+
+  public String getCuisineType() {
+    String sql = "SELECT type FROM cuisine WHERE cuisineid = (SELECT cuisineId FROM restaurants WHERE id=:id)";
+    try(Connection con = DB.sql2o.open()) {
+      return con.createQuery(sql)
+        .addParameter("id", id)
+        .executeAndFetchFirst(String.class);
+    }
+
+  }
+
   /******************************************************
     Students:
-    TODO: Create find method
+    **TODO: Create find method
     TODO: Create method to get cuisine type
   *******************************************************/
 

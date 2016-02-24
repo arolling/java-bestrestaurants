@@ -48,4 +48,13 @@ public class RestaurantTest {
     assertFalse(Restaurant.all().contains(testRestaurant));
     assertTrue(Restaurant.all().contains(testRestaurant2));
   }
+
+  @Test
+  public void getCuisine_findsTheCuisineForASpecificRestaurant() {
+    Cuisine testCuisine = new Cuisine("Mexican");
+    testCuisine.save();
+    Restaurant testRestaurant = new Restaurant("Mexican Palace", testCuisine.getId());
+    testRestaurant.save();
+    assertEquals(testRestaurant.getCuisineType(), "Mexican");
+  }
 }

@@ -47,4 +47,15 @@ public class CuisineTest {
     assertTrue(Cuisine.find(testCuisine2.getId()).equals(testCuisine2));
   }
 
+  @Test
+  public void delete_deletesTheSpecifiedCuisineBasedOnId() {
+    Cuisine testCuisine = new Cuisine("Mexican");
+    Cuisine testCuisine2 = new Cuisine("Italian");
+    testCuisine.save();
+    testCuisine2.save();
+    testCuisine.delete();
+    assertFalse(Cuisine.all().contains(testCuisine));
+    assertTrue(Cuisine.all().contains(testCuisine2));
+  }
+
 }

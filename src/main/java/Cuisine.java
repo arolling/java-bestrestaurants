@@ -30,8 +30,8 @@ public class Cuisine {
 
   //CREATE
   public void save() {
+    String sql = "INSERT INTO cuisine (type) VALUES (:type)";
     try (Connection con = DB.sql2o.open()) {
-      String sql = "INSERT INTO cuisine (type) VALUES (:type)";
       this.cuisineId = (int) con.createQuery(sql, true)
         .addParameter("type", type)
         .executeUpdate()
@@ -61,10 +61,11 @@ public class Cuisine {
   }
 
   public void delete() {
+    String sql = "DELETE FROM cuisine WHERE cuisineId = :cuisineId";
     try(Connection con = DB.sql2o.open()) {
-      /******************************************************
-        Students: TODO: Create sql query and execute update
-      *******************************************************/
+      con.createQuery(sql)
+        .addParameter("cuisineId", cuisineId)
+        .executeUpdate();
     }
   }
 
@@ -78,7 +79,7 @@ public class Cuisine {
   }
   /******************************************************
     Students:
-    TODO: Create find method
+    **TODO: Create find method
     TODO: Create method to get restaurants
   *******************************************************/
 

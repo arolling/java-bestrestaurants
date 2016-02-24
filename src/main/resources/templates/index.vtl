@@ -1,1 +1,21 @@
+<div class="jumbotron">
+  <h2>Daren & Abby's Favorite Restaurants</h2>
+</div>
 
+
+<div class="row">
+  <div class="col-sm-9">
+    #if($allRestaurants.size() > 0)
+      <ul>
+        #foreach ($restaurant in $allRestaurants)
+          <li>$restaurant.getName()</li>
+        #end
+      </ul>
+
+
+    #end
+  </div>
+  <div class="col-sm-3">
+
+  </div>
+</div>

@@ -27,6 +27,39 @@ public class Restaurant {
     return cuisineId;
   }
 
+  public void setPriceRange(int price) {
+    priceRange = price;
+  }
+
+  public int getPriceRange() {
+    return priceRange;
+  }
+
+  public void setAddress(String address) {
+    this.address = address;
+  }
+
+  public int getAddress() {
+    return address;
+  }
+
+  public void setRegion(int region) {
+    regionId = region;
+  }
+
+  public int getRegionId() {
+    return regionId;
+  }
+
+  public void setHours(String hours) {
+    this.hours = hours;
+  }
+
+  public int getHours() {
+    return hours;
+  }
+
+
   @Override
   public boolean equals(Object otherRestaurant){
     if (!(otherRestaurant instanceof Restaurant)) {

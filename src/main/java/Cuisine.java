@@ -77,10 +77,20 @@ public class Cuisine {
         .executeAndFetchFirst(Cuisine.class);
     }
   }
+
+  public List<Restaurant> getRestaurants() {
+    String sql = "SELECT * FROM restaurants WHERE cuisineId = :cuisineId";
+    try (Connection con = DB.sql2o.open()) {
+      return con.createQuery(sql)
+        .addParameter("cuisineId", cuisineId)
+        .executeAndFetch(Restaurant.class);
+    }
+  }
+
   /******************************************************
     Students:
     **TODO: Create find method
-    TODO: Create method to get restaurants
+    **TODO: Create method to get restaurants
   *******************************************************/
 
 }

@@ -104,7 +104,7 @@ public class Restaurant {
   /******************************************************
     Students:
     **TODO: Create find method
-    TODO: Create method to get cuisine type
+    **TODO: Create method to get cuisine type
   *******************************************************/
 
 }

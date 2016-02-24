@@ -23,9 +23,8 @@ public class Cuisine {
       return false;
     } else {
       Cuisine newCuisine = (Cuisine) otherCuisine;
-      return this.getType().equals(newCuisine.getType());
-      // &&
-      //   this.getId() == newCuisine.getId();
+      return this.getType().equals(newCuisine.getType()) &&
+        this.getId() == newCuisine.getId();
     }
   }
 
@@ -52,10 +51,12 @@ public class Cuisine {
   //UPDATE
   public void update(String newType) {
     this.type = newType;
+    String sql = "UPDATE cuisine SET type = :type WHERE cuisineId = :cuisineId";
     try(Connection con = DB.sql2o.open()) {
-      /******************************************************
-        Students: TODO: Create sql query and execute update
-      *******************************************************/
+      con.createQuery(sql)
+        .addParameter("type", type)
+        .addParameter("cuisineId", cuisineId)
+        .executeUpdate();
     }
   }
 
@@ -67,6 +68,14 @@ public class Cuisine {
     }
   }
 
+  public static Cuisine find(int id) {
+    String sql = "SELECT * FROM cuisine WHERE cuisineId = :id";
+    try(Connection con = DB.sql2o.open()) {
+      return con.createQuery(sql)
+        .addParameter("id", id)
+        .executeAndFetchFirst(Cuisine.class);
+    }
+  }
   /******************************************************
     Students:
     TODO: Create find method

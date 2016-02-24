@@ -29,6 +29,13 @@ public class Restaurant {
 
   public void setPriceRange(int price) {
     priceRange = price;
+    String sql = "UPDATE restaurants SET pricerange = :priceRange WHERE id = :id";
+    try(Connection con = DB.sql2o.open()) {
+      con.createQuery(sql)
+        .addParameter("priceRange", priceRange)
+        .addParameter("id", this.id)
+        .executeUpdate();
+    }
   }
 
   public int getPriceRange() {
@@ -37,14 +44,28 @@ public class Restaurant {
 
   public void setAddress(String address) {
     this.address = address;
+    String sql = "UPDATE restaurants SET address = :address WHERE id = :id";
+    try(Connection con = DB.sql2o.open()) {
+      con.createQuery(sql)
+        .addParameter("address", this.address)
+        .addParameter("id", this.id)
+        .executeUpdate();
+    }
   }
 
-  public int getAddress() {
+  public String getAddress() {
     return address;
   }
 
   public void setRegion(int region) {
     regionId = region;
+    String sql = "UPDATE restaurants SET regionId = :regionId WHERE id = :id";
+    try(Connection con = DB.sql2o.open()) {
+      con.createQuery(sql)
+        .addParameter("regionId", this.regionId)
+        .addParameter("id", this.id)
+        .executeUpdate();
+    }
   }
 
   public int getRegionId() {
@@ -53,9 +74,16 @@ public class Restaurant {
 
   public void setHours(String hours) {
     this.hours = hours;
+    String sql = "UPDATE restaurants SET hours = :hours WHERE id = :id";
+    try(Connection con = DB.sql2o.open()) {
+      con.createQuery(sql)
+        .addParameter("hours", this.hours)
+        .addParameter("id", this.id)
+        .executeUpdate();
+    }
   }
 
-  public int getHours() {
+  public String getHours() {
     return hours;
   }
 
@@ -68,6 +96,10 @@ public class Restaurant {
       Restaurant newRestaurant = (Restaurant) otherRestaurant;
       return this.getName().equals(newRestaurant.getName()) &&
         this.getCuisineId() == newRestaurant.getCuisineId() &&
+        this.getPriceRange() == newRestaurant.getPriceRange() &&
+        this.getRegionId() == newRestaurant.getRegionId() &&
+        //this.getHours().equals(newRestaurant.getHours()) &&
+        //this.getAddress().equals(newRestaurant.getAddress()) &&
         this.getId() == newRestaurant.getId();
     }
   }

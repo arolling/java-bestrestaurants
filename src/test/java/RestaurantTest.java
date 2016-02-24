@@ -57,4 +57,17 @@ public class RestaurantTest {
     testRestaurant.save();
     assertEquals(testRestaurant.getCuisineType(), "Mexican");
   }
+
+  @Test
+  public void setters_setAndGetOptionalAttributes_true() {
+    Restaurant testRestaurant = new Restaurant("Italian Pizzeria", 1);
+    testRestaurant.save();
+    testRestaurant.setPriceRange(2);
+    testRestaurant.setAddress("1200 Main St");
+    testRestaurant.setRegion(3);
+    testRestaurant.setHours("8 AM to 11 PM");
+    assertTrue(Restaurant.all().get(0).equals(testRestaurant));
+    assertTrue(Restaurant.all().get(0).getAddress().equals("1200 Main St"));
+  }
+
 }

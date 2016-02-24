@@ -23,21 +23,20 @@ public class Cuisine {
       return false;
     } else {
       Cuisine newCuisine = (Cuisine) otherCuisine;
-      return this.getType().equals(newCuisine.getType()) &&
-        this.getId() == newCuisine.getId();
+      return this.getType().equals(newCuisine.getType());
+      // &&
+      //   this.getId() == newCuisine.getId();
     }
   }
 
   //CREATE
   public void save() {
     try (Connection con = DB.sql2o.open()) {
-      // String sql = "INSERT INTO cuisine (type) VALUES (:type)";
-      // con.createQuery(sql)
-      //   .addParameter("type", type)
-      //   .executeUpdate();
-      /******************************************************
-        Students: TODO: Create sql query and execute update
-      *******************************************************/
+      String sql = "INSERT INTO cuisine (type) VALUES (:type)";
+      this.cuisineId = (int) con.createQuery(sql, true)
+        .addParameter("type", type)
+        .executeUpdate()
+        .getKey();
     }
   }
 

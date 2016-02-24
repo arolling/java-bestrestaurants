@@ -2,19 +2,19 @@ import org.sql2o.*;
 import java.util.List;
 
 public class Cuisine {
-  private int mId;
-  private String mType;
+  private int cuisineId;
+  private String type;
 
   public Cuisine (String type) {
-    this.mType = type;
+    this.type = type;
   }
 
   public int getId() {
-    return mId;
+    return cuisineId;
   }
 
   public String getType() {
-    return mType;
+    return type;
   }
 
   @Override
@@ -31,6 +31,10 @@ public class Cuisine {
   //CREATE
   public void save() {
     try (Connection con = DB.sql2o.open()) {
+      // String sql = "INSERT INTO cuisine (type) VALUES (:type)";
+      // con.createQuery(sql)
+      //   .addParameter("type", type)
+      //   .executeUpdate();
       /******************************************************
         Students: TODO: Create sql query and execute update
       *******************************************************/
@@ -39,16 +43,16 @@ public class Cuisine {
 
   //READ
   public static List<Cuisine> all() {
+    String sql = "SELECT * FROM cuisine";
     try (Connection con = DB.sql2o.open()) {
-      /******************************************************
-        Students: TODO: Create sql query and execute update
-      *******************************************************/
+      return con.createQuery(sql)
+        .executeAndFetch(Cuisine.class);
     }
   }
 
   //UPDATE
   public void update(String newType) {
-    this.mType = newType;
+    this.type = newType;
     try(Connection con = DB.sql2o.open()) {
       /******************************************************
         Students: TODO: Create sql query and execute update

@@ -38,13 +38,13 @@ public class Restaurant {
   }
 
   //READ
-  public static List<Restaurant> all() {
-    try (Connection con = DB.sql2o.open()) {
-      /******************************************************
-        Students: TODO: Display all restaurants on main page
-      *******************************************************/
-    }
-  }
+  // public static List<Restaurant> all() {
+  //   try (Connection con = DB.sql2o.open()) {
+  //     /******************************************************
+  //       Students: TODO: Display all restaurants on main page
+  //     *******************************************************/
+  //   }
+  // }
 
   //UPDATE
   public void update(String newName) {

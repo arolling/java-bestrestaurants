@@ -41,7 +41,7 @@ public class Cuisine {
 
   //READ
   public static List<Cuisine> all() {
-    String sql = "SELECT * FROM cuisine";
+    String sql = "SELECT DISTINCT ON (type) * FROM cuisine ORDER BY type, cuisineid";
     try (Connection con = DB.sql2o.open()) {
       return con.createQuery(sql)
         .executeAndFetch(Cuisine.class);

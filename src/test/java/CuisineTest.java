@@ -14,6 +14,20 @@ public class CuisineTest {
   }
 
   @Test
+  public void all_returnsOnlyOneRowIfMultipleEntriesHaveSameType_true() {
+    Cuisine testCuisine = new Cuisine("Mexican");
+    Cuisine testCuisine2 = new Cuisine("Mexican");
+    Cuisine testCuisine3 = new Cuisine("Mexican");
+    Cuisine testCuisine4 = new Cuisine("Mexican");
+    testCuisine.save();
+    testCuisine2.save();
+    testCuisine3.save();
+    testCuisine4.save();
+    assertEquals(Cuisine.all().size(), 1);
+    assertEquals(testCuisine, Cuisine.all().get(0));
+  }
+
+  @Test
   public void save_returnsTrueIfTypesAreTheSame() {
     Cuisine testCuisine = new Cuisine("Italian");
     testCuisine.save();

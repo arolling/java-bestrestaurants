@@ -159,8 +159,11 @@ ALTER TABLE ONLY restaurants ALTER COLUMN id SET DEFAULT nextval('restaurants_id
 --
 
 COPY cuisine (cuisineid, type) FROM stdin;
-1	American
-2	Southern
+1	\N
+2	\N
+3	sushi
+4	sushi
+5	sushi
 \.
 
 
@@ -168,7 +171,7 @@ COPY cuisine (cuisineid, type) FROM stdin;
 -- Name: cuisine_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Guest
 --
 
-SELECT pg_catalog.setval('cuisine_id_seq', 2, true);
+SELECT pg_catalog.setval('cuisine_id_seq', 5, true);
 
 
 --
@@ -225,14 +228,6 @@ ALTER TABLE ONLY regions
 
 ALTER TABLE ONLY restaurants
     ADD CONSTRAINT restaurants_pkey PRIMARY KEY (id);
-
-
---
--- Name: type; Type: CONSTRAINT; Schema: public; Owner: Guest; Tablespace: 
---
-
-ALTER TABLE ONLY cuisine
-    ADD CONSTRAINT type UNIQUE (type);
 
 
 --

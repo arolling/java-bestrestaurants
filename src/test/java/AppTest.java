@@ -60,11 +60,14 @@ public class AppTest extends FluentTest {
     Cuisine testCuisine2 = new Cuisine("Italian9");
     testCuisine.save();
     testCuisine2.save();
-    Restaurant testRestaurant = new Restaurant("Fado", testCuisine.getId());
+    Restaurant testRestaurant = new Restaurant("Fado", testCuisine2.getId());
+    testRestaurant.save();
+    Restaurant testRestaurant2 = new Restaurant("Pedro's", testCuisine.getId());
+    testRestaurant2.save();
     goTo("http://localhost:4567/new-restaurant");
     fill("#cuisineType").with("Sushi");
     submit("#addCuisine");
     assertThat(pageSource()).contains("Sushi");
-
+    assertThat(pageSource()).contains("Fado");
   }
 }

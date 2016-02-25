@@ -12,6 +12,7 @@ public class App {
 
     get("/", (request, response) -> {
       HashMap<String, Object> model = new HashMap<String, Object>();
+      model.put("allCuisines", Cuisine.all());
       model.put("allRestaurants", Restaurant.all());
       model.put("template", "templates/index.vtl");
       return new ModelAndView(model, layout);
@@ -31,6 +32,7 @@ public class App {
 
     get("/new-restaurant", (request, response) -> {
       HashMap<String, Object> model = new HashMap<String, Object>();
+      model.put("allRestaurants", Restaurant.all());
       model.put("allCuisines", Cuisine.all());
       model.put("template", "templates/newrestaurant.vtl");
       return new ModelAndView(model, layout);
@@ -41,6 +43,7 @@ public class App {
       String type = request.queryParams("cuisineType");
       Cuisine newCuisine = new Cuisine(type);
       newCuisine.save();
+      model.put("allRestaurants", Restaurant.all());
       model.put("allCuisines", Cuisine.all());
       model.put("template", "templates/newrestaurant.vtl");
       return new ModelAndView(model, layout);

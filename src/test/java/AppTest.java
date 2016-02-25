@@ -142,4 +142,24 @@ public class AppTest extends FluentTest {
     assertThat(!(pageSource()).contains("Pedro's"));
     assertThat(pageSource()).contains("Fado");
   }
+
+  @Test
+  public void deleteRestaurant() {
+    Cuisine testCuisine = new Cuisine("Mexican");
+    Cuisine testCuisine2 = new Cuisine("Italian");
+    testCuisine.save();
+    testCuisine2.save();
+    Restaurant testRestaurant = new Restaurant("Fado", testCuisine2.getId());
+    testRestaurant.save();
+    Restaurant testRestaurant2 = new Restaurant("Pedro's", testCuisine.getId());
+    testRestaurant2.save();
+    Restaurant testRestaurant3 = new Restaurant("Pizza Hut", testCuisine2.getId());
+    testRestaurant3.save();
+    goTo("http://localhost:4567/");
+    click("a", withText("Pizza Hut"));
+    click("a", withText("Delete Pizza Hut"));
+    click(".btn-danger");
+    assertThat(pageSource()).contains("Fado");
+    assertThat(!(pageSource()).contains("Pizza Hut"));
+  }
 }

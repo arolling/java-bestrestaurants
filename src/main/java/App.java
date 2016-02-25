@@ -89,14 +89,32 @@ public class App {
       HashMap<String, Object> model = new HashMap<String, Object>();
       int id = Integer.parseInt(request.params("id"));
       Cuisine selectedCuisine = Cuisine.find(id);
-      //model.put("regions", Region.all());
 
       model.put("cuisine", selectedCuisine);
       model.put("template", "templates/onecuisine.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
+    get("/confirm/:id", (request, response) -> {
+      HashMap<String, Object> model = new HashMap<String, Object>();
+      int id = Integer.parseInt(request.params("id"));
+      Restaurant restaurant = Restaurant.find(id);
 
+      model.put("restaurant", restaurant);
+      model.put("template", "templates/delete.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+    get("/delete/:id", (request, response) -> {
+      HashMap<String, Object> model = new HashMap<String, Object>();
+      int id = Integer.parseInt(request.params("id"));
+      Restaurant restaurant = Restaurant.find(id);
+      restaurant.delete();
+      model.put("allCuisines", Cuisine.all());
+      model.put("allRestaurants", Restaurant.all());
+      model.put("template", "templates/index.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
 
 
 
@@ -104,7 +122,7 @@ public class App {
     STUDENTS:
     **TODO: Create page to display information about the selected restaurant
     --INCLUDING FORM TO ADD OPTIONAL DATA
-    TODO: Create page to display restaurants by cuisine type
+    **TODO: Create page to display restaurants by cuisine type
     *******************************************************/
 
   }

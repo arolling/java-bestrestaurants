@@ -85,6 +85,16 @@ public class App {
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
+    get("/cuisine/:id", (request, response) -> {
+      HashMap<String, Object> model = new HashMap<String, Object>();
+      int id = Integer.parseInt(request.params("id"));
+      Cuisine selectedCuisine = Cuisine.find(id);
+      //model.put("regions", Region.all());
+
+      model.put("cuisine", selectedCuisine);
+      model.put("template", "templates/onecuisine.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
 
 
 

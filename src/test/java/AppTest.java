@@ -137,7 +137,9 @@ public class AppTest extends FluentTest {
     testRestaurant2.save();
     Restaurant testRestaurant3 = new Restaurant("Pizza Hut", testCuisine2.getId());
     testRestaurant3.save();
+    goTo("http://localhost:4567/");
     click("a", withText("Italian"));
     assertThat(!(pageSource()).contains("Pedro's"));
+    assertThat(pageSource()).contains("Fado");
   }
 }

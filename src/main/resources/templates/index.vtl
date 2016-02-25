@@ -1,17 +1,23 @@
 
 <div class="row">
-  <div class="col-sm-9">
+  <div class="col-sm-6">
+    <h1>Great Restaurants</h1>
     #if($allRestaurants.size() > 0)
       <ul>
         #foreach ($restaurant in $allRestaurants)
-          <li>$restaurant.getName()</li>
+          <h4><li><a href="restaurant/$restaurant.getId()">$restaurant.getName()</a></li></h4>
         #end
       </ul>
-
-
     #end
   </div>
-  <div class="col-sm-3">
-    <a href="/new-restaurant">Add New Restaurant</a>
+  <div class="col-sm-6">
+    <h1>Filter By Type of Cuisine</h1>
+    #if ($allCuisines.size() != 0)
+    <ul>
+      #foreach($cuisine in $allCuisines)
+      <h4><li>$cuisine.getType()</li></h4>
+      #end
+    </ul>
+    #end
   </div>
 </div>

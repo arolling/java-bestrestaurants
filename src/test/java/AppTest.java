@@ -70,4 +70,19 @@ public class AppTest extends FluentTest {
     assertThat(pageSource()).contains("Sushi");
     assertThat(pageSource()).contains("Fado");
   }
+
+  @Test
+  public void getPageForSpecificRestaurant() {
+    Cuisine testCuisine = new Cuisine("Mexican");
+    Cuisine testCuisine2 = new Cuisine("Italian");
+    testCuisine.save();
+    testCuisine2.save();
+    Restaurant testRestaurant = new Restaurant("Fado", testCuisine2.getId());
+    testRestaurant.save();
+    Restaurant testRestaurant2 = new Restaurant("Pedro's", testCuisine.getId());
+    testRestaurant2.save();
+    goTo("http://localhost:4567/");
+    click("a", withText("Fado"));
+    assertThat(pageSource()).contains("Italian");
+  }
 }

@@ -64,11 +64,11 @@ public class App {
       int id = Integer.parseInt(request.params("id"));
       Restaurant restaurant = Restaurant.find(id);
       String address = request.queryParams("address");
-      if (address != null){
+      if (address.length() > 0){
         restaurant.setAddress(address);
       }
       String hours = request.queryParams("hours");
-      if (hours != null) {
+      if (hours.length() > 0) {
         restaurant.setHours(hours);
       }
       int priceRange = Integer.parseInt(request.queryParams("selectPrice"));
@@ -92,7 +92,7 @@ public class App {
 
     /******************************************************
     STUDENTS:
-    TODO: Create page to display information about the selected restaurant
+    **TODO: Create page to display information about the selected restaurant
     --INCLUDING FORM TO ADD OPTIONAL DATA
     TODO: Create page to display restaurants by cuisine type
     *******************************************************/

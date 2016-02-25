@@ -124,4 +124,20 @@ public class AppTest extends FluentTest {
     assertThat(pageSource()).contains("Area:");
     assertEquals(testRestaurant.getArea(), "Southeast Portland");
   }
+
+  @Test
+  public void filterRestaurantsByCuisineType() {
+    Cuisine testCuisine = new Cuisine("Mexican");
+    Cuisine testCuisine2 = new Cuisine("Italian");
+    testCuisine.save();
+    testCuisine2.save();
+    Restaurant testRestaurant = new Restaurant("Fado", testCuisine2.getId());
+    testRestaurant.save();
+    Restaurant testRestaurant2 = new Restaurant("Pedro's", testCuisine.getId());
+    testRestaurant2.save();
+    Restaurant testRestaurant3 = new Restaurant("Pizza Hut", testCuisine2.getId());
+    testRestaurant3.save();
+    click("a", withText("Italian"));
+    assertThat(!(pageSource()).contains("Pedro's"));
+  }
 }

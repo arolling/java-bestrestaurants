@@ -1,5 +1,5 @@
 <h1>$restaurant.getName()</h1>
-<h2>$restaurant.getCuisineType()</h2>
+<h3>$restaurant.getCuisineType()</h3>
 #if ($restaurant.getAddress())
   <h2>$restaurant.getAddress()</h2>
 #end
@@ -7,20 +7,20 @@
   <h2>Hours:</h2>
   <h3>$restaurant.getHours()</h3>
 #end
-#if ($restaurant.getPriceRange())
+#if ($restaurant.getPriceRange() > 0)
   <h2>Price:
     #foreach($i in [1..$restaurant.getPriceRange()])
       $
     #end
   </h2>
 #end
-#if ($restaurant.getArea())
+#if ($restaurant.getRegionId() > 0)
   <h2>Area:</h2>
   <h3>$restaurant.getArea()</h3>
 #end
 
 
-<h3>Add more information about this restaurant</h3>
+<h3>Add or edit information about this restaurant</h3>
 <form action="/restaurant/$restaurant.getId()" method="post">
   <div class="form-group">
     <label for="address">Location Address:</label>
@@ -33,6 +33,7 @@
   <div class="form-group">
     <label for="selectPrice">Price Range:</label>
     <select class="form-control" type="text" name="selectPrice" id="selectPrice">
+      <option value="0"></option>
       <option value="1">$</option>
       <option value="2">$$</option>
       <option value="3">$$$</option>
@@ -43,8 +44,9 @@
   <div class="form-group">
     <label for="selectArea">Select Area:</label>
     <select class="form-control" type="text" name="selectArea" id="selectArea">
+      <option value="0"></option>
       #foreach ($region in $regions)
-        <option value="$region.getId()">$region.getArea()</option>
+        <option value="$region.getId()">$region.getRegionArea()</option>
       #end
     </select>
   </div>

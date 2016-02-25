@@ -70,6 +70,10 @@ public class App {
       if (hours != null) {
         restaurant.setHours(hours);
       }
+      int priceRange = Integer.parseInt(request.queryParams("selectPrice"));
+      if (priceRange > 0) {
+        restaurant.setPriceRange(priceRange);
+      }
       model.put("restaurant", restaurant);
       model.put("template", "templates/onerestaurant.vtl");
       return new ModelAndView(model, layout);

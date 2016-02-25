@@ -114,8 +114,10 @@ public class AppTest extends FluentTest {
     testRestaurant2.save();
     goTo("http://localhost:4567/restaurant/" + testRestaurant.getId());
     fill("#hours").with("4-11 Tuesday through Sunday");
-    
+    Select select = new Select(webDriver.findElement(By.id("selectPrice")));
+    select.selectByValue("3");
     submit("#restaurantInfo");
     assertThat(pageSource()).contains("4-11 Tuesday through Sunday");
+    assertThat(pageSource()).contains("Price:");
   }
 }

@@ -6,6 +6,14 @@
 #if ($restaurant.getHours())
   <h2>$restaurant.getHours()</h2>
 #end
+#if ($restaurant.getPriceRange())
+  <h2>Price:
+    #foreach($i in [1..$restaurant.getPriceRange()])
+      $
+    #end
+  </h2>
+#end
+
 
 <h3>Add more information about this restaurant</h3>
 <form action="/restaurant/$restaurant.getId()" method="post">
@@ -16,6 +24,16 @@
   <div class="form-group">
     <label for="hours">Hours:</label>
     <input class="form-control" type="text" name="hours" id="hours">
+  </div>
+  <div class="form-group">
+    <label for="selectPrice">Price Range:</label>
+    <select class="form-control" type="text" name="selectPrice" id="selectPrice">
+      <option value="1">$</option>
+      <option value="2">$$</option>
+      <option value="3">$$$</option>
+      <option value="4">$$$$</option>
+      <option value="5">$$$$$</option>
+    </select>
   </div>
   <button type="submit" id="restaurantInfo" class="btn btn-primary">Add</button>
 </form>

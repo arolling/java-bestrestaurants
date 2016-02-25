@@ -1,2 +1,13 @@
 <h1>$restaurant.getName()</h1>
 <h2>$restaurant.getCuisineType()</h2>
+#if ($restaurant.getAddress())
+  <h2>$restaurant.getAddress()</h2>
+#end
+<h3>Add more information about this restaurant</h3>
+<form action="/restaurant/$restaurant.getId()" method="post">
+  <div class="form-group">
+    <label for="address">Restaurant Address:</label>
+    <input class="form-control" type="text" name="address" id="address">
+  </div>
+  <button type="submit" id="restaurantInfo" class="btn btn-primary">Add</button>
+</form>

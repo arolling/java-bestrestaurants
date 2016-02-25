@@ -3,11 +3,19 @@
 #if ($restaurant.getAddress())
   <h2>$restaurant.getAddress()</h2>
 #end
+#if ($restaurant.getHours())
+  <h2>$restaurant.getHours()</h2>
+#end
+
 <h3>Add more information about this restaurant</h3>
 <form action="/restaurant/$restaurant.getId()" method="post">
   <div class="form-group">
-    <label for="address">Restaurant Address:</label>
+    <label for="address">Location Address:</label>
     <input class="form-control" type="text" name="address" id="address">
+  </div>
+  <div class="form-group">
+    <label for="hours">Hours:</label>
+    <input class="form-control" type="text" name="hours" id="hours">
   </div>
   <button type="submit" id="restaurantInfo" class="btn btn-primary">Add</button>
 </form>

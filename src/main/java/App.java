@@ -66,6 +66,10 @@ public class App {
       if (address != null){
         restaurant.setAddress(address);
       }
+      String hours = request.queryParams("hours");
+      if (hours != null) {
+        restaurant.setHours(hours);
+      }
       model.put("restaurant", restaurant);
       model.put("template", "templates/onerestaurant.vtl");
       return new ModelAndView(model, layout);

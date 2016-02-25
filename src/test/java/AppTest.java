@@ -87,7 +87,7 @@ public class AppTest extends FluentTest {
   }
 
   @Test
-  public void addNewOptionalInformationToRestaurant() {
+  public void addNewAddressOnlyToRestaurant() {
     Cuisine testCuisine = new Cuisine("Mexican");
     Cuisine testCuisine2 = new Cuisine("Italian");
     testCuisine.save();
@@ -100,5 +100,22 @@ public class AppTest extends FluentTest {
     fill("#address").with("1200 Main St");
     submit("#restaurantInfo");
     assertThat(pageSource()).contains("1200 Main St");
+  }
+
+  @Test
+  public void addNewOptionalInformationToRestaurant() {
+    Cuisine testCuisine = new Cuisine("Mexican");
+    Cuisine testCuisine2 = new Cuisine("Italian");
+    testCuisine.save();
+    testCuisine2.save();
+    Restaurant testRestaurant = new Restaurant("Fado", testCuisine2.getId());
+    testRestaurant.save();
+    Restaurant testRestaurant2 = new Restaurant("Pedro's", testCuisine.getId());
+    testRestaurant2.save();
+    goTo("http://localhost:4567/restaurant/" + testRestaurant.getId());
+    fill("#hours").with("4-11 Tuesday through Sunday");
+    
+    submit("#restaurantInfo");
+    assertThat(pageSource()).contains("4-11 Tuesday through Sunday");
   }
 }

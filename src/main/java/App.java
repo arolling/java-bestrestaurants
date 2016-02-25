@@ -3,6 +3,9 @@ import java.util.HashMap;
 import static spark.Spark.*;
 import spark.ModelAndView;
 import spark.template.velocity.VelocityTemplateEngine;
+import java.util.Arrays;
+import java.util.List;
+
 
 public class App {
 
@@ -25,6 +28,7 @@ public class App {
       int cuisineId = Integer.parseInt(cuisineIdString);
       Restaurant newRestaurant = new Restaurant(name, cuisineId);
       newRestaurant.save();
+      model.put("allCuisines", Cuisine.all());
       model.put("allRestaurants", Restaurant.all());
       model.put("template", "templates/index.vtl");
       return new ModelAndView(model, layout);
@@ -113,6 +117,33 @@ public class App {
       model.put("allCuisines", Cuisine.all());
       model.put("allRestaurants", Restaurant.all());
       model.put("template", "templates/index.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+    get("/search", (request, response) -> {
+      HashMap<String, Object> model = new HashMap<String, Object>();
+
+
+      model.put("regions", Region.all());
+      model.put("allCuisines", Cuisine.all());
+      model.put("selectedRestaurants", Restaurant.all());
+      model.put("template", "templates/search.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+    post("/search", (request, response) -> {
+      HashMap<String, Object> model = new HashMap<String, Object>();
+      List<Restaurant> filteredRestaurants = Restaurant.all();
+      String[] selectedRegions = request.queryParamsValues("checkRegion");
+      if(selectedRegions.length >= 1) {
+        filteredRestaurants = Restaurant.searchByRegion(selectedRegions);
+      }
+
+
+      model.put("regions", Region.all());
+      model.put("allCuisines", Cuisine.all());
+      model.put("selectedRestaurants", filteredRestaurants);
+      model.put("template", "templates/search.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 

@@ -5,7 +5,7 @@
     #if($allRestaurants.size() > 0)
       <ul>
         #foreach ($restaurant in $allRestaurants)
-          <h4><li><a href="restaurant/$restaurant.getId()">$restaurant.getName()</a></li></h4>
+          <h4><li><a href="/restaurant/$restaurant.getId()">$restaurant.getName()</a></li></h4>
         #end
       </ul>
     #end
@@ -15,7 +15,7 @@
     #if ($allCuisines.size() != 0)
     <ul>
       #foreach($cuisine in $allCuisines)
-      <h4><li><a href="cuisine/$cuisine.getId()">$cuisine.getType()</a></li></h4>
+      <h4><li><a href="/cuisine/$cuisine.getId()">$cuisine.getType()</a></li></h4>
       #end
     </ul>
     #end

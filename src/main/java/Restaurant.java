@@ -156,6 +156,25 @@ public class Restaurant {
     }
   }
 
+  public static List<Restaurant> searchByRegion(String[] selectedRegions) {
+    String sql = "SELECT * FROM restaurants WHERE ";
+    int counter = 1;
+    for (String id : selectedRegions) {
+      if (counter == 1) {
+        sql += "regionid = " + id;
+        counter++;
+      } else {
+        sql += " OR regionid = " +id;
+      }
+    }
+    try (Connection con = DB.sql2o.open()) {
+      return con.createQuery(sql)
+        .executeAndFetch(Restaurant.class);
+    }
+  }
+
+
+
   public String getCuisineType() {
     String sql = "SELECT type FROM cuisine WHERE cuisineid = (SELECT cuisineId FROM restaurants WHERE id=:id)";
     try(Connection con = DB.sql2o.open()) {

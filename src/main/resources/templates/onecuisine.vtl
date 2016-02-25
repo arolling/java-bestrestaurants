@@ -5,7 +5,7 @@
 <ul>
   #if ($cuisine.getRestaurants().size() != 0)
     #foreach($restaurant in $cuisine.getRestaurants())
-      <h4><li><a href="../restaurant/$restaurant.getId()">$restaurant.getName()</a></li></h4>
+      <h4><li><a href="/restaurant/$restaurant.getId()">$restaurant.getName()</a></li></h4>
     #end
   #end
 

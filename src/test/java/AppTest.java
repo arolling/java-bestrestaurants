@@ -162,4 +162,28 @@ public class AppTest extends FluentTest {
     assertThat(pageSource()).contains("Fado");
     assertThat(!(pageSource()).contains("Pizza Hut"));
   }
+
+  @Test
+  public void advancedSearch() {
+    Cuisine testCuisine = new Cuisine("Mexican");
+    Cuisine testCuisine2 = new Cuisine("Italian");
+    testCuisine.save();
+    testCuisine2.save();
+    Restaurant testRestaurant = new Restaurant("Fado", testCuisine2.getId());
+    testRestaurant.save();
+    Restaurant testRestaurant2 = new Restaurant("Pedro's", testCuisine.getId());
+    testRestaurant2.save();
+    Restaurant testRestaurant3 = new Restaurant("Pizza Hut", testCuisine2.getId());
+    testRestaurant3.save();
+    testRestaurant.setRegion(2);
+    testRestaurant2.setRegion(3);
+    testRestaurant3.setRegion(2);
+    goTo("http://localhost:4567/");
+    click("a", withText("Advanced Search"));
+    click("#region2");
+    submit("#search");
+    assertThat(pageSource()).contains("Fado");
+    assertThat(!(pageSource()).contains("Pedro's"));
+  }
+
 }

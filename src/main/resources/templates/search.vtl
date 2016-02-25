@@ -2,6 +2,7 @@
   <div class="col-sm-6">
     <h1>Filter by Options:</h1>
     <form action="/search" method="post">
+      <h4>Area</h4>
       <div class="checkbox">
         #foreach($region in $regions)
           <label>
@@ -10,16 +11,18 @@
           </label>
         #end
       </div>
+      <h4>Cuisine Type</h4>
+      <div class="checkbox">
+        #foreach($cuisine in $allCuisines)
+          <label>
+            <input type="checkbox" name="checkCuisine" value="$cuisine.getId()" id="cuisine$cuisine.getId()">
+            $cuisine.getType()
+          </label>
+        #end
+      </div>
+
       <button type="submit" id="search" class="btn btn-info">Search</button>
     </form>
-
-    #if ($allCuisines.size() != 0)
-    <ul>
-      #foreach($cuisine in $allCuisines)
-      <h4><li><a href="/cuisine/$cuisine.getId()">$cuisine.getType()</a></li></h4>
-      #end
-    </ul>
-    #end
   </div>
   <div class="col-sm-6">
     <h1>Selected Restaurants</h1>

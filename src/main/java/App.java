@@ -5,6 +5,8 @@ import spark.ModelAndView;
 import spark.template.velocity.VelocityTemplateEngine;
 import java.util.Arrays;
 import java.util.List;
+import java.util.ArrayList;
+import java.io.Console;
 
 
 public class App {
@@ -12,6 +14,7 @@ public class App {
   public static void main(String[] args) {
     staticFileLocation("/public");
     String layout = "templates/layout.vtl";
+    Console console = System.console();
 
     get("/", (request, response) -> {
       HashMap<String, Object> model = new HashMap<String, Object>();
@@ -135,10 +138,23 @@ public class App {
       HashMap<String, Object> model = new HashMap<String, Object>();
       List<Restaurant> filteredRestaurants = Restaurant.all();
       String[] selectedRegions = request.queryParamsValues("checkRegion");
-      if(selectedRegions.length >= 1) {
+      System.out.println(request.queryParamsValues("checkRegion"));
+      if(selectedRegions != null) {
         filteredRestaurants = Restaurant.searchByRegion(selectedRegions);
       }
-
+      String[] selectedCuisines = request.queryParamsValues("checkCuisine");
+      if(selectedCuisines != null) {
+        ArrayList<Restaurant> tempRestaurants = new ArrayList<Restaurant>();
+        for (String cuisine : selectedCuisines) {
+          int cuisineId = Integer.parseInt(cuisine);
+          for (Restaurant location : filteredRestaurants) {
+            if (cuisineId == location.getCuisineId()) {
+              tempRestaurants.add(location);
+            }
+          }
+        }
+        filteredRestaurants = tempRestaurants;
+      }
 
       model.put("regions", Region.all());
       model.put("allCuisines", Cuisine.all());

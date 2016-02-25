@@ -10,9 +10,6 @@ public class App {
     staticFileLocation("/public");
     String layout = "templates/layout.vtl";
 
-    /******************************************************
-      Students: TODO: Display all restaurants on main page
-    *******************************************************/
     get("/", (request, response) -> {
       HashMap<String, Object> model = new HashMap<String, Object>();
       model.put("allRestaurants", Restaurant.all());
@@ -20,14 +17,36 @@ public class App {
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
-    /******************************************************
-    Students: TODO: Create page to add a new restaurant
-    *******************************************************/
-    get("/new-restaurant", (request, reponse) -> {
+    post("/", (request, response) -> {
       HashMap<String, Object> model = new HashMap<String, Object>();
+      String name = request.queryParams("restaurantName");
+      String cuisineIdString = request.queryParams("selectCuisine");
+      int cuisineId = Integer.parseInt(cuisineIdString);
+      Restaurant newRestaurant = new Restaurant(name, cuisineId);
+      newRestaurant.save();
+      model.put("allRestaurants", Restaurant.all());
+      model.put("template", "templates/index.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+    get("/new-restaurant", (request, response) -> {
+      HashMap<String, Object> model = new HashMap<String, Object>();
+      model.put("allCuisines", Cuisine.all());
       model.put("template", "templates/newrestaurant.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
+
+    post("/new-restaurant", (request, response) -> {
+      HashMap<String, Object> model = new HashMap<String, Object>();
+      String type = request.queryParams("cuisineType");
+      Cuisine newCuisine = new Cuisine(type);
+      newCuisine.save();
+      model.put("allCuisines", Cuisine.all());
+      model.put("template", "templates/newrestaurant.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+
 
     /******************************************************
     STUDENTS:

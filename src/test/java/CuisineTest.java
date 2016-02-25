@@ -40,7 +40,7 @@ public class CuisineTest {
   @Test
   public void find_findsTheSpecificCuisineBasedOnId() {
     Cuisine testCuisine = new Cuisine("Mexican");
-    Cuisine testCuisine2 = new Cuisine("Italian");
+    Cuisine testCuisine2 = new Cuisine("Italian5");
     testCuisine.save();
     testCuisine2.save();
     assertEquals(Cuisine.find(testCuisine.getId()).getType(), "Mexican");
@@ -49,8 +49,8 @@ public class CuisineTest {
 
   @Test
   public void delete_deletesTheSpecifiedCuisineBasedOnId() {
-    Cuisine testCuisine = new Cuisine("Mexican");
-    Cuisine testCuisine2 = new Cuisine("Italian");
+    Cuisine testCuisine = new Cuisine("Mexican2");
+    Cuisine testCuisine2 = new Cuisine("Italian2");
     testCuisine.save();
     testCuisine2.save();
     testCuisine.delete();
@@ -60,8 +60,8 @@ public class CuisineTest {
 
   @Test
   public void getRestaurants_getsRestaurantsWithSpecificCuisine() {
-    Cuisine testCuisine = new Cuisine("Mexican");
-    Cuisine testCuisine2 = new Cuisine("Italian");
+    Cuisine testCuisine = new Cuisine("Mexican3");
+    Cuisine testCuisine2 = new Cuisine("Italian3");
     testCuisine.save();
     testCuisine2.save();
     Restaurant testRestaurant = new Restaurant("Mexican Palace", testCuisine.getId());

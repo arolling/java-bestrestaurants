@@ -53,6 +53,7 @@ public class App {
       HashMap<String, Object> model = new HashMap<String, Object>();
       int id = Integer.parseInt(request.params("id"));
       Restaurant restaurant = Restaurant.find(id);
+      model.put("regions", Region.all());
       model.put("restaurant", restaurant);
       model.put("template", "templates/onerestaurant.vtl");
       return new ModelAndView(model, layout);
@@ -74,6 +75,11 @@ public class App {
       if (priceRange > 0) {
         restaurant.setPriceRange(priceRange);
       }
+      int regionId = Integer.parseInt(request.queryParams("selectArea"));
+      if (regionId > 0) {
+        restaurant.setRegion(regionId);
+      }
+      model.put("regions", Region.all());
       model.put("restaurant", restaurant);
       model.put("template", "templates/onerestaurant.vtl");
       return new ModelAndView(model, layout);

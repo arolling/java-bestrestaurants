@@ -70,4 +70,14 @@ public class RestaurantTest {
     assertTrue(Restaurant.all().get(0).getAddress().equals("1200 Main St"));
   }
 
+  @Test
+  public void getArea_usingJoinQueryForFun_true() {
+    Cuisine testCuisine = new Cuisine("Mexican");
+    testCuisine.save();
+    Restaurant testRestaurant = new Restaurant("Mexican Palace", testCuisine.getId());
+    testRestaurant.save();
+    testRestaurant.setRegion(1);
+    assertEquals(testRestaurant.getArea(), "North Portland");
+  }
+
 }

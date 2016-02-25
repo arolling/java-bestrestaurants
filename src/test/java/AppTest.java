@@ -116,8 +116,12 @@ public class AppTest extends FluentTest {
     fill("#hours").with("4-11 Tuesday through Sunday");
     Select select = new Select(webDriver.findElement(By.id("selectPrice")));
     select.selectByValue("3");
+    Select select2 = new Select(webDriver.findElement(By.id("selectArea")));
+    select2.selectByValue("3");
     submit("#restaurantInfo");
     assertThat(pageSource()).contains("4-11 Tuesday through Sunday");
     assertThat(pageSource()).contains("Price:");
+    assertThat(pageSource()).contains("Area:");
+    assertEquals(testRestaurant.getArea(), "Southeast Portland");
   }
 }

@@ -163,7 +163,15 @@ public class Restaurant {
         .addParameter("id", id)
         .executeAndFetchFirst(String.class);
     }
+  }
 
+  public String getArea() {
+    String sql = "SELECT regions.area FROM restaurants JOIN regions ON restaurants.regionid = regions.id WHERE restaurants.id = :id";
+    try(Connection con = DB.sql2o.open()) {
+      return con.createQuery(sql)
+        .addParameter("id", id)
+        .executeAndFetchFirst(String.class);
+    }
   }
 
   /******************************************************

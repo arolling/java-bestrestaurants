@@ -159,11 +159,15 @@ ALTER TABLE ONLY restaurants ALTER COLUMN id SET DEFAULT nextval('restaurants_id
 --
 
 COPY cuisine (cuisineid, type) FROM stdin;
-1	\N
-2	\N
 3	sushi
-4	sushi
 5	sushi
+1	Mexican
+2	Italian
+4	Southern
+6	Burgers
+7	Sushi
+8	Swanky Pub Food
+9	Mediterranean
 \.
 
 
@@ -171,7 +175,7 @@ COPY cuisine (cuisineid, type) FROM stdin;
 -- Name: cuisine_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Guest
 --
 
-SELECT pg_catalog.setval('cuisine_id_seq', 5, true);
+SELECT pg_catalog.setval('cuisine_id_seq', 9, true);
 
 
 --
@@ -179,6 +183,15 @@ SELECT pg_catalog.setval('cuisine_id_seq', 5, true);
 --
 
 COPY regions (id, area) FROM stdin;
+1	North Portland
+2	Northeast Portland
+3	Southeast Portland
+4	Northwest Portland
+5	Southwest Portland
+6	Gresham
+7	Beaverton
+8	Lake Oswego
+9	Vancouver
 \.
 
 
@@ -186,7 +199,7 @@ COPY regions (id, area) FROM stdin;
 -- Name: regions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Guest
 --
 
-SELECT pg_catalog.setval('regions_id_seq', 1, false);
+SELECT pg_catalog.setval('regions_id_seq', 9, true);
 
 
 --
@@ -194,8 +207,15 @@ SELECT pg_catalog.setval('regions_id_seq', 1, false);
 --
 
 COPY restaurants (id, name, cuisineid, pricerange, address, regionid, hours) FROM stdin;
-1	Screen Door	\N	\N	\N	\N	\N
-2	Lardo	\N	\N	\N	\N	\N
+5	Feral Pub	8	2	\N	9	\N
+8	Pizza Hut	2	1	\N	3	24/7
+9	Applebee's	6	2	\N	4	\N
+2	Lardo	2	1	\N	4	24 hours a day
+1	Screen Door	1	3	1200 Main St	1	4PM to 3AM
+10	Mediterranean Grill	9	0	\N	\N	\N
+3	Luca	4	5	\N	6	\N
+11	Du's Grill	7	3	NE Sandy	2	8AM to 5PM
+7	Uchu	7	2	\N	7	\N
 \.
 
 
@@ -203,7 +223,7 @@ COPY restaurants (id, name, cuisineid, pricerange, address, regionid, hours) FRO
 -- Name: restaurants_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Guest
 --
 
-SELECT pg_catalog.setval('restaurants_id_seq', 2, true);
+SELECT pg_catalog.setval('restaurants_id_seq', 11, true);
 
 
 --

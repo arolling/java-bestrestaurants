@@ -2,10 +2,10 @@
 
 ##### Epicodus exercise using Java and Postgres, 01.21.2016
 
-##### Author Names
+##### Abby Rolling & Daren Schaad
 
 ## Description
-Add a description here
+A program that you can add your favorite restaurants to and filter your searches through neighborhood, price, and cuisine type.
 
 ## Setup
 
@@ -25,7 +25,7 @@ Open a new tab in terminal and create the `best-restaurants` database:
 ```
 $ psql
 $ CREATE DATABASE best_restaurants;
-$ psql best_restaurants < best_restaurants.sql
+$ psql best_restaurants < best_restaurants_new.sql
 ```
 
 Navigate back to the directory where this repository has been cloned and run gradle:
@@ -35,7 +35,7 @@ $ gradle run
 
 ## Legal
 
-Copyright (c) 2016 Author names go here
+Copyright (c) 2016 by Abby Rolling & Daren Schaad
 
 This software is licensed under the MIT license.
 

@@ -1,6 +1,6 @@
 # Best Restaurants
 
-##### Epicodus exercise using Java and Postgres, 01.21.2016
+##### Epicodus exercise using Java and Postgres, 02.25.2016
 
 ##### Abby Rolling & Daren Schaad
 

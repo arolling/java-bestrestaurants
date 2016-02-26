@@ -1,0 +1,15 @@
+.footer {
+  background-color: #B21C20;
+  color: #A1B2A6;
+  margin-top: 250px;
+  text-align: right;
+}
+
+.footertext {
+  color: #A1B2A6;
+}
+
+.jumbotron {
+  background-color: #A1B2A6;
+  text-align: center;
+}

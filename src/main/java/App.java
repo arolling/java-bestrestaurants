@@ -6,7 +6,7 @@ import spark.template.velocity.VelocityTemplateEngine;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ArrayList;
-import java.io.Console;
+
 
 
 public class App {
@@ -14,7 +14,6 @@ public class App {
   public static void main(String[] args) {
     staticFileLocation("/public");
     String layout = "templates/layout.vtl";
-    Console console = System.console();
 
     get("/", (request, response) -> {
       HashMap<String, Object> model = new HashMap<String, Object>();
@@ -138,7 +137,6 @@ public class App {
       HashMap<String, Object> model = new HashMap<String, Object>();
       List<Restaurant> filteredRestaurants = Restaurant.all();
       String[] selectedRegions = request.queryParamsValues("checkRegion");
-      System.out.println(request.queryParamsValues("checkRegion"));
       if(selectedRegions != null) {
         filteredRestaurants = Restaurant.searchByRegion(selectedRegions);
       }
@@ -151,6 +149,17 @@ public class App {
             if (cuisineId == location.getCuisineId()) {
               tempRestaurants.add(location);
             }
+          }
+        }
+        filteredRestaurants = tempRestaurants;
+      }
+
+      int maxPrice = Integer.parseInt(request.queryParams("filterPrice"));
+      if (maxPrice > 0) {
+        ArrayList<Restaurant> tempRestaurants = new ArrayList<Restaurant>();
+        for (Restaurant location : filteredRestaurants) {
+          if (maxPrice >= location.getPriceRange()) {
+            tempRestaurants.add(location);
           }
         }
         filteredRestaurants = tempRestaurants;
